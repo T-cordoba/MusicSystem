@@ -1,4 +1,5 @@
 import pygame
+import random
 import os
 
 
@@ -94,23 +95,10 @@ class AudioPlayer:
 
     def set_volume(self, volume: float):
         self.volume = volume
-        pygame.mixer.music.set_volume(self.volume)
-
-    def volume_up(self):
-        if self.volume < 1:
-            self.volume += 0.1
+        if 0 <= self.volume <= 1:
             pygame.mixer.music.set_volume(self.volume)
         else:
-            self.volume = 1
-            pygame.mixer.music.set_volume(self.volume)
-
-    def volume_down(self):
-        if self.volume > 0:
-            self.volume -= 0.1
-            pygame.mixer.music.set_volume(self.volume)
-        else:
-            self.volume = 0
-            pygame.mixer.music.set_volume(self.volume)
+            raise ValueError("El volumen debe estar entre 0 y 100.")
 
     def play_playlist(self, playlist: Playlist):
         if playlist.songs:
@@ -249,6 +237,14 @@ class SysMusic:
             if existing_song.title == song.title and existing_song.artist == song.artist and existing_song.genre == song.genre:
                 raise AlreadyExistsError("La canción ya existe en la lista de canciones.")
         self.songs.append(song)
+
+    def create_random_playlist(self):
+        if len(self.songs) < 10:
+            raise ValueError("No hay suficientes canciones para crear una lista de reproducción aleatoria.")
+        i=0
+        random_songs = random.sample(self.songs, 10)
+        random_playlist = Playlist(random_songs, "Random Playlist")
+
 
     def remove_song(self, song: Song):
         self.songs.remove(song)

@@ -182,9 +182,13 @@ class SysMusicGUI:
             [sg.Text('')],
             [sg.Text('Playlists del usuario:')],
             [sg.Listbox(values=[], size=(50, 10), key='-PLAYLIST LIST-', bind_return_key=True)],
-            [sg.Button('Crear playlist'), sg.Button('Eliminar playlist'), ],
-            [sg.Button('Reproducir playlist'), sg.Button('Ver playlist'), ],
+            [sg.Button('Crear playlist'), sg.Button('Eliminar playlist'), sg.Button('Editar playlist'),
+             sg.Button('Crear playlist aleatoria')],
+            [sg.Button('Reproducir playlist'), ],
             [sg.Text('')],
+            [sg.Text('')],
+            [sg.Text('Volumen:'), sg.InputText(self.sys_music.audio_player.volume * 100, key='-VOLUME-')],
+            [sg.Button('Cambiar volumen')],
             [sg.Text('')],
             [sg.Button('Reproducir'), sg.Button('Pausar'), sg.Button('Parar'), sg.Button('Siguiente'),
              sg.Button('Añadir a la cola')]
@@ -281,7 +285,7 @@ class SysMusicGUI:
                         [playlist.name for playlist in self.sys_music.user.playlists.values()])
                 else:
                     sg.popup('Por favor, selecciona una playlist antes de presionar eliminar')
-            elif event == 'Ver playlist':
+            elif event == 'Editar playlist':
                 if values['-PLAYLIST LIST-']:
                     selected_playlist = values['-PLAYLIST LIST-'][0]
                     self.view_playlist_gui(selected_playlist)
@@ -314,7 +318,18 @@ class SysMusicGUI:
                             break
                 else:
                     sg.popup('Por favor, selecciona una canción antes de presionar añadir a la cola')
-
+            elif event == 'Cambiar volumen':
+                try:
+                    self.sys_music.audio_player.set_volume(int(values['-VOLUME-']) / 100)
+                except ValueError as e:
+                    sg.popup(e)
+            elif event == 'Crear playlist aleatoria':
+                try:
+                    self.sys_music.create_random_playlist()
+                    window['-PLAYLIST LIST-'].update(
+                        [playlist.name for playlist in self.sys_music.user.playlists.values()])
+                except ValueError as e:
+                    sg.popup(e)
         window.close()
 
     def edit_song_gui(self, song):

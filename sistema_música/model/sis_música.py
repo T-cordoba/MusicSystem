@@ -96,6 +96,22 @@ class AudioPlayer:
         self.volume = volume
         pygame.mixer.music.set_volume(self.volume)
 
+    def volume_up(self):
+        if self.volume < 1:
+            self.volume += 0.1
+            pygame.mixer.music.set_volume(self.volume)
+        else:
+            self.volume = 1
+            pygame.mixer.music.set_volume(self.volume)
+
+    def volume_down(self):
+        if self.volume > 0:
+            self.volume -= 0.1
+            pygame.mixer.music.set_volume(self.volume)
+        else:
+            self.volume = 0
+            pygame.mixer.music.set_volume(self.volume)
+
     def play_playlist(self, playlist: Playlist):
         if playlist.songs:
             first_song = playlist.songs[0]

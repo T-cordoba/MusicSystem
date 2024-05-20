@@ -46,3 +46,8 @@ class PlaylistNotFoundError(Exception):
 class PlaylistAlreadyExistsError(Exception):
     def __init__(self, message):
         self.message = message
+
+
+class NotMusicPlaying(Exception):
+    def __init__(self, message):
+        self.message = message

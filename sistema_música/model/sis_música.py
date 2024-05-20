@@ -3,7 +3,7 @@ import random
 import json
 from pathlib import Path
 from sistema_música.exceptions.exceptions import (AlreadyExistsError, EmptySongNameError, PlaylistNotFoundError,
-                                                  PlaylistAlreadyExistsError)
+                                                  PlaylistAlreadyExistsError, NotMusicPlaying)
 
 
 class Song:
@@ -101,7 +101,10 @@ class AudioPlayer:
             self.play(next_song)
 
     def add_to_queue(self, song: Song):
-        self.queue.append(song)
+        if self.is_playing:
+            self.queue.append(song)
+        else:
+            raise NotMusicPlaying("No hay música reproduciéndose.")
 
     def set_volume(self, volume: float):
         self.volume = volume

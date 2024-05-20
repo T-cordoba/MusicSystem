@@ -1,0 +1,236 @@
+[
+    {
+        "title": "bad guy",
+        "artist": "Billie Eilish",
+        "genre": "Pop",
+        "file_path": "Billie Eilish - bad guy.mp3"
+    },
+    {
+        "title": "Kiss Me More",
+        "artist": "Doja Cat ft. SZA",
+        "genre": "Pop",
+        "file_path": "Doja Cat - Kiss Me More.mp3"
+    },
+    {
+        "title": "Levitating",
+        "artist": "Dua Lipa",
+        "genre": "Pop",
+        "file_path": "Dua Lipa - Levitating.mp3"
+    },
+    {
+        "title": "Shape of You",
+        "artist": "Ed Sheeran",
+        "genre": "Pop",
+        "file_path": "Ed Sheeran - Shape of You.mp3"
+    },
+    {
+        "title": "As it was",
+        "artist": "Harry Styles",
+        "genre": "Pop",
+        "file_path": "Harry Styles - As It Was.mp3"
+    },
+    {
+        "title": "Roar",
+        "artist": "Katy Perry",
+        "genre": "Pop",
+        "file_path": "Katy Perry - Roar.mp3"
+    },
+    {
+        "title": "Bad Romance",
+        "artist": "Lady Gaga",
+        "genre": "Pop",
+        "file_path": "Lady Gaga - Bad Romance.mp3"
+    },
+    {
+        "title": "Sugar",
+        "artist": "Maroon 5",
+        "genre": "Pop",
+        "file_path": "Maroon 5 - Sugar.mp3"
+    },
+    {
+        "title": "Billie Jean",
+        "artist": "Michael Jackson",
+        "genre": "Pop",
+        "file_path": "Michael Jackson - Billie Jean.mp3"
+    },
+    {
+        "title": "good 4 u",
+        "artist": "Olivia Rodrigo",
+        "genre": "Pop",
+        "file_path": "Olivia Rodrigo - good 4 u.mp3"
+    },
+    {
+        "title": "Sunflower",
+        "artist": "Post Malone ft. Swae Lee",
+        "genre": "Pop",
+        "file_path": "Post Malone & Swae Lee - Sunflower.mp3"
+    },
+    {
+        "title": "Bohemian Rhapsody",
+        "artist": "Queen",
+        "genre": "Pop",
+        "file_path": "Queen - Bohemian Rhapsody.mp3"
+    },
+    {
+        "title": "Leave the Door Open",
+        "artist": "Silk Sonic",
+        "genre": "Pop",
+        "file_path": "Silk Sonic - Leave the Door Open.mp3"
+    },
+    {
+        "title": "Blank Space",
+        "artist": "Taylor Swift",
+        "genre": "Pop",
+        "file_path": "Taylor Swift - Blank Space.mp3"
+    },
+    {
+        "title": "Blinding Lights",
+        "artist": "The Weeknd",
+        "genre": "Pop",
+        "file_path": "The Weeknd - Blinding Lights.mp3"
+    },
+    {
+        "title": "Back in Black",
+        "artist": "AC/DC",
+        "genre": "Rock",
+        "file_path": "ACDC - Back in Black.mp3"
+    },
+    {
+        "title": "Sweet Child O Mine",
+        "artist": "Guns N Roses",
+        "genre": "Rock",
+        "file_path": "Guns N Roses - Sweet Child o Mine.mp3"
+    },
+    {
+        "title": "Smells Like Teen Spirit",
+        "artist": "Nirvana",
+        "genre": "Rock",
+        "file_path": "Nirvana - Smells Like Teen Spirit.mp3"
+    },
+    {
+        "title": "Radioactive",
+        "artist": "Imagine Dragons",
+        "genre": "Rock",
+        "file_path": "Imagine Dragons - Radioactive.mp3"
+    },
+    {
+        "title": "Everlong",
+        "artist": "Foo Fighters",
+        "genre": "Rock",
+        "file_path": "Foo Fighters - Everlong.mp3"
+    },
+    {
+        "title": "In the End",
+        "artist": "Linkin Park",
+        "genre": "Rock",
+        "file_path": "Linkin Park - In the End.mp3"
+    },
+    {
+        "title": "Stairway to Heaven",
+        "artist": "Led Zeppelin",
+        "genre": "Rock",
+        "file_path": "Led Zeppelin - Stairway to Heaven.mp3"
+    },
+    {
+        "title": "Enter Sandman",
+        "artist": "Metallica",
+        "genre": "Rock",
+        "file_path": "Metallica - Enter Sandman.mp3"
+    },
+    {
+        "title": "Hey Jude",
+        "artist": "The Beatles",
+        "genre": "Rock",
+        "file_path": "The Beatles - Hey Jude.mp3"
+    },
+    {
+        "title": "Wish You Were Here",
+        "artist": "Pink Floyd",
+        "genre": "Rock",
+        "file_path": "Pink Floyd - Wish You Were Here.mp3"
+    },
+    {
+        "title": "One more time",
+        "artist": "Daft Punk",
+        "genre": "Electronica",
+        "file_path": "Daft Punk - One More Time.mp3"
+    },
+    {
+        "title": "Feel so close",
+        "artist": "Calvin Harris",
+        "genre": "Electronica",
+        "file_path": "Calvin Harris - Feel So Close.mp3"
+    },
+    {
+        "title": "Wake me up",
+        "artist": "Avicii",
+        "genre": "Electronica",
+        "file_path": "Avicii - Wake Me Up.mp3"
+    },
+    {
+        "title": "Dont you worry child",
+        "artist": "Swedish House Mafia",
+        "genre": "Electronica",
+        "file_path": "Swedish House Mafia - Dont You Worry Child.mp3"
+    },
+    {
+        "title": "Animals",
+        "artist": "Martin Garrix",
+        "genre": "Electronica",
+        "file_path": "Martin Garrix - Animals.mp3"
+    },
+    {
+        "title": "Ghost n Stuff",
+        "artist": "Deadmau5",
+        "genre": "Electronica",
+        "file_path": "Deadmau5 - Ghosts n Stuff.mp3"
+    },
+    {
+        "title": "D.A.N.C.E.",
+        "artist": "Justice",
+        "genre": "Electronica",
+        "file_path": "Justice - D.A.N.C.E..mp3"
+    },
+    {
+        "title": "Galvanize",
+        "artist": "The Chemical Brothers",
+        "genre": "Electronica",
+        "file_path": "The Chemical Brothers - Galvanize.mp3"
+    },
+    {
+        "title": "HUMBLE.",
+        "artist": "Kendrick Lamar",
+        "genre": "Hip Hop",
+        "file_path": "Kendrick Lamar - HUMBLE..mp3"
+    },
+    {
+        "title": "Gods Plan",
+        "artist": "Drake",
+        "genre": "Hip Hop",
+        "file_path": "Drake - Gods Plan.mp3"
+    },
+    {
+        "title": "Stronger",
+        "artist": "Kanye West",
+        "genre": "Hip Hop",
+        "file_path": "Kanye West - Stronger.mp3"
+    },
+    {
+        "title": "Lose Yourself",
+        "artist": "Eminem",
+        "genre": "Hip Hop",
+        "file_path": "Eminem - Lose Yourself.mp3"
+    },
+    {
+        "title": "Empire State of Mind",
+        "artist": "Jay Z ft. Alicia",
+        "genre": "Hip Hop",
+        "file_path": "Jay-Z - Empire State of Mind.mp3"
+    },
+    {
+        "title": "Changes",
+        "artist": "2Pac",
+        "genre": "Hip Hop",
+        "file_path": "Tupac Shakur - Changes.mp3"
+    }
+]

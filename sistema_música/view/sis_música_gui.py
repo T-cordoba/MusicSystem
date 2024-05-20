@@ -6,42 +6,43 @@ from sistema_música.exceptions.exceptions import (InvalidNameError, InvalidEmai
 
 
 class SysMusicGUI:
-    sg.theme('DarkPurple4')
+    sg.theme('DarkAmber')
 
     def __init__(self, sys_music: SysMusic):
         self.sys_music = sys_music
 
     def start_menu_gui(self):
-        layout = [[sg.Col([[sg.Text('Sistema de música')],
-                           [sg.Text('')],
-                           [sg.Image(str((Path(__file__).resolve().parents[2] / 'assets' / 'music_icon.png')),
-                            subsample=5)],
-                           [sg.Text('')],
-                           [sg.Button('Iniciar', size=(10, 2)), sg.Button('Salir', size=(10, 2))]],
-                          element_justification='c')]
-                  ]
-        window = sg.Window('Sistema de música', layout)
+        layout = [
+                [sg.Text('Sistema de música')],
+                [sg.Text('')],
+                [sg.Image(str((Path(__file__).resolve().parents[2] / 'assets' / 'music_icon.png')),
+                          subsample=5)],
+                [sg.Text('')],
+                [sg.Button('Iniciar', size=(8, 2), border_width=0), sg.Button('Salir', size=(8, 2), border_width=0)]
+        ]
+        window = sg.Window('Sistema de música', layout, element_justification='c', finalize=True)
         while True:
             event, values = window.read()
             if event == sg.WINDOW_CLOSED or event == 'Salir':
                 break
             if event == 'Iniciar':
+                window.close()
                 self.user_info_gui()
                 self.music_player_gui()
-                window.close()
         window.close()
 
     def user_info_gui(self):
         while True:
             layout = [
-                [sg.Text('Ingrese su nombre:'), sg.InputText(key='-NAME-')],
-                [sg.Text('Ingrese su email:'), sg.InputText(key='-EMAIL-')],
-                [sg.Text('Ingrese su edad:'), sg.InputText(key='-AGE-')],
-                [sg.Text('Ingrese su ocupación:'), sg.InputText(key='-OCCUPATION-')],
-                [sg.Text('Ingrese su país:'), sg.InputText(key='-COUNTRY-')],
-                [sg.Button('Ok')]
+                [sg.Text('Ingrese su nombre:'), sg.InputText(key='-NAME-', expand_x=True, size=(5, 1))],
+                [sg.Text('Ingrese su email:'), sg.InputText(key='-EMAIL-', expand_x=True, size=(5, 1))],
+                [sg.Text('Ingrese su edad:'), sg.InputText(key='-AGE-', expand_x=True, size=(5, 1))],
+                [sg.Text('Ingrese su ocupación:'), sg.InputText(key='-OCCUPATION-', expand_x=True, size=(5, 1))],
+                [sg.Text('Ingrese su país:'), sg.InputText(key='-COUNTRY-', expand_x=True, size=(5, 1))],
+                [sg.Button('Ok', border_width=0, size=(8, 1))]
             ]
-            window = sg.Window('Información del usuario', layout)
+            window = sg.Window('Información del usuario', layout, element_justification='c', resizable=True,
+                               margins=(15, 10))
             while True:
                 event, values = window.read()
                 if event == sg.WINDOW_CLOSED:
@@ -78,7 +79,7 @@ class SysMusicGUI:
             [sg.Text('Titulo:'), sg.InputText(key='-TITLE-')],
             [sg.Text('Artista:'), sg.InputText(key='-ARTIST-')],
             [sg.Text('Genero:'), sg.InputText(key='-GENRE-')],
-            [sg.Button('OK'), sg.Button('Cancelar')]
+            [sg.Button('OK', border_width=0), sg.Button('Cancelar', border_width=0)]
         ]
         window = sg.Window('Añadir canción', layout)
         while True:
@@ -93,7 +94,7 @@ class SysMusicGUI:
     def create_playlist_gui(self):
         layout = [
             [sg.Text('Nombre de la playlist:'), sg.InputText(key='-NAME-')],
-            [sg.Button('OK')]
+            [sg.Button('OK', border_width=0)]
         ]
         window = sg.Window('Crear playlist', layout)
         while True:
@@ -110,7 +111,7 @@ class SysMusicGUI:
         layout = [
             [sg.Text(playlist_name, key='-PLAYLIST NAME-')],
             [sg.Text('Nuevo nombre:'), sg.InputText(key='-NEW NAME-')],
-            [sg.Button('OK')]
+            [sg.Button('OK', border_width=0)]
         ]
         window = sg.Window('Renombrar playlist', layout)
         while True:
@@ -133,11 +134,11 @@ class SysMusicGUI:
             [sg.Text(f'Playlist: {playlist_name}')],
             [sg.Text('Canciones en la playlist:')],
             [sg.Listbox(values=song_list, size=(50, 20), key='-SONG LIST-')],
-            [sg.Button('Añadir canción'), sg.Button('Eliminar canción')],
+            [sg.Button('Añadir canción', border_width=0), sg.Button('Eliminar canción', border_width=0)],
             [sg.Text('Canciones disponibles:')],
             [sg.Listbox(values=[f"{song.title} - {song.artist} - {song.genre}" for song in self.sys_music.songs],
                         size=(50, 10), key='-SONG LIST AVAILABLE-')],
-            [sg.Button('OK')]
+            [sg.Button('OK', border_width=0)]
         ]
 
         window = sg.Window('Ver playlist', layout)
@@ -179,32 +180,41 @@ class SysMusicGUI:
             sg.popup('Por favor, ingrese su información de usuario antes de continuar')
             return
         layout = [
-            [sg.Button('Información del usuario')],
+            [sg.Button('Información del usuario', tooltip='Muestra la información del usuario', border_width=0)],
             [sg.Text(f'Hola, {user_name}')],
             [sg.Text('')],
             [sg.Input(key='-FILE-', visible=False, enable_events=True),
-             sg.FileBrowse(file_types=(("MP3 Files", "*.mp3"),))],
+             sg.FileBrowse(file_types=(("MP3 Files", "*.mp3"), ), button_text='Añadir canción',
+                           tooltip='Agrega un archivo de música al sistema')],
             [sg.Text('Canciones disponibles:'), sg.Text('                                                     '),
              sg.Text('Canciones en la cola:')],
-            [sg.Listbox(values=[], size=(50, 10), key='-SONG LIST-', bind_return_key=True),
-             sg.Listbox(values=[], size=(50, 10), key='-QUEUE-', bind_return_key=True)],
-            [sg.Button('Editar'), sg.Button('Eliminar')],
+            [sg.Listbox(values=[], size=(50, 2), key='-SONG LIST-', bind_return_key=True, expand_y=True),
+             sg.Listbox(values=[], size=(50, 2), key='-QUEUE-', bind_return_key=True, expand_y=True,
+                        justification='right')],
+            [sg.Button('Editar', tooltip='Edita la información de la canción seleccionada', border_width=0),
+             sg.Button('Eliminar', tooltip='Elimina la canción seleccionada', border_width=0)],
             [sg.Text('')],
             [sg.Text('Playlists del usuario:')],
-            [sg.Listbox(values=[], size=(50, 10), key='-PLAYLIST LIST-', bind_return_key=True)],
-            [sg.Button('Crear playlist'), sg.Button('Eliminar playlist'), sg.Button('Renombrar playlist'),
-             sg.Button('Ver playlist')],
-            [sg.Button('Crear playlist aleatoria'), sg.Button('Recomendar playlist')],
-            [sg.Button('Reproducir playlist'), ],
+            [sg.Listbox(values=[], size=(50, 2), key='-PLAYLIST LIST-', bind_return_key=True, expand_y=True)],
+            [sg.Button('Crear playlist', tooltip='Crea una playlist', border_width=0),
+             sg.Button('Eliminar playlist', tooltip='Elimina la playlist seleccionada', border_width=0),
+             sg.Button('Renombrar playlist', tooltip='Renombra la playlist seleccionada', border_width=0),
+             sg.Button('Ver playlist', tooltip='Muestra y edita las canciones de la playlist seleccionada',
+                       border_width=0)],
+            [sg.Button('Crear playlist aleatoria', tooltip='Crea una playlist aleatoria', border_width=0),
+             sg.Button('Recomendar playlist',
+                       tooltip='Recomienda una playlist con generos similares a la playlist seleccionada',
+                       border_width=0)],
+            [sg.Button('Reproducir playlist', tooltip='Reproducir la playlist seleccionada', border_width=0)],
             [sg.Text('')],
-            [sg.Text('Volumen:'), sg.InputText(self.sys_music.audio_player.volume * 100, key='-VOLUME-', size=(5, 5)),
-             sg.Text('%')],
-            [sg.Button('Cambiar volumen')],
+            [sg.Text('Volumen:')],
+            [sg.Slider(range=(0, 100), orientation='horizontal', size=(20, 20), key='-VOLUME SLIDER-',
+                       default_value=50)],
             [sg.Text('')],
             [sg.Button('Reproducir'), sg.Button('Pausar'), sg.Button('Parar'), sg.Button('Siguiente'),
              sg.Button('Añadir a la cola')]
         ]
-        window = sg.Window('Sistema de música', layout, finalize=True, )
+        window = sg.Window('Sistema de música', layout, finalize=True, resizable=True)
         window['-SONG LIST-'].update(
             [f"{song.title} - {song.artist} - {song.genre}" for song in self.sys_music.songs])
         paused = False
@@ -225,6 +235,7 @@ class SysMusicGUI:
                     window['-SONG LIST-'].update(
                         [f"{song.title} - {song.artist} - {song.genre}" for song in self.sys_music.songs])
             elif event == sg.TIMEOUT_EVENT:
+                self.sys_music.audio_player.set_volume(int(values['-VOLUME SLIDER-']) / 100)
                 if not self.sys_music.audio_player.is_music_playing():
                     self.sys_music.audio_player.next()
                     window['-QUEUE-'].update(
@@ -330,18 +341,16 @@ class SysMusicGUI:
                     selected_song_details = values['-SONG LIST-'][0].split(' - ')
                     for song in self.sys_music.songs:
                         if [song.title, song.artist, song.genre] == selected_song_details:
-                            self.sys_music.audio_player.add_to_queue(song)
-                            window['-QUEUE-'].update(
-                                [f"{song.title} - {song.artist} - {song.genre}" for song in
-                                 self.sys_music.audio_player.queue])
-                            break
+                            try:
+                                self.sys_music.audio_player.add_to_queue(song)
+                                window['-QUEUE-'].update(
+                                    [f"{song.title} - {song.artist} - {song.genre}" for song in
+                                     self.sys_music.audio_player.queue])
+                                break
+                            except Exception as e:
+                                sg.popup(e)
                 else:
                     sg.popup('Por favor, selecciona una canción antes de presionar añadir a la cola')
-            elif event == 'Cambiar volumen':
-                try:
-                    self.sys_music.audio_player.set_volume(int(values['-VOLUME-']) / 100)
-                except ValueError as e:
-                    sg.popup(e)
             elif event == 'Crear playlist aleatoria':
                 try:
                     self.sys_music.create_random_playlist()

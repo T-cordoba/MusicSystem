@@ -13,7 +13,7 @@ class SysMusicGUI:
 
     def start_menu_gui(self):
         layout = [
-                [sg.Text('Sistema de música')],
+                [sg.Text('Sistema de música', font=('Book', 20))],
                 [sg.Text('')],
                 [sg.Image(str((Path(__file__).resolve().parents[2] / 'assets' / 'music_icon.png')),
                           subsample=5)],
@@ -41,7 +41,7 @@ class SysMusicGUI:
                 [sg.Text('Ingrese su país:'), sg.InputText(key='-COUNTRY-', expand_x=True, size=(5, 1))],
                 [sg.Button('Ok', border_width=0, size=(8, 1))]
             ]
-            window = sg.Window('Información del usuario', layout, element_justification='c', resizable=True,
+            window = sg.Window('Información del usuario', layout, element_justification='c', resizable=False,
                                margins=(15, 10))
             while True:
                 event, values = window.read()

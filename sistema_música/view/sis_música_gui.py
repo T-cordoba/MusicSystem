@@ -14,9 +14,8 @@ class SysMusicGUI:
     def start_menu_gui(self):
         layout = [
                 [sg.Text('Sistema de música', font=('Book', 20))],
-                [sg.Text('')],
                 [sg.Image(str((Path(__file__).resolve().parents[2] / 'assets' / 'music_icon.png')),
-                          subsample=5)],
+                          subsample=4)],
                 [sg.Text('')],
                 [sg.Button('Iniciar', size=(8, 2), border_width=0), sg.Button('Salir', size=(8, 2), border_width=0)]
         ]
@@ -41,7 +40,7 @@ class SysMusicGUI:
                 [sg.Text('Ingrese su país:'), sg.InputText(key='-COUNTRY-', expand_x=True, size=(5, 1))],
                 [sg.Button('Ok', border_width=0, size=(8, 1))]
             ]
-            window = sg.Window('Información del usuario', layout, element_justification='c', resizable=False,
+            window = sg.Window('Información del usuario', layout, element_justification='c', resizable=True,
                                margins=(15, 10))
             while True:
                 event, values = window.read()
@@ -208,7 +207,7 @@ class SysMusicGUI:
             [sg.Button('Reproducir playlist', tooltip='Reproducir la playlist seleccionada', border_width=0)],
             [sg.Text('')],
             [sg.Text('Volumen:')],
-            [sg.Slider(range=(0, 100), orientation='horizontal', size=(20, 20), key='-VOLUME SLIDER-',
+            [sg.Slider(range=(0, 100), orientation='horizontal', size=(20, 10), key='-VOLUME SLIDER-',
                        default_value=50)],
             [sg.Text('')],
             [sg.Button('Reproducir'), sg.Button('Pausar'), sg.Button('Parar'), sg.Button('Siguiente'),
@@ -236,6 +235,7 @@ class SysMusicGUI:
                         [f"{song.title} - {song.artist} - {song.genre}" for song in self.sys_music.songs])
             elif event == sg.TIMEOUT_EVENT:
                 self.sys_music.audio_player.set_volume(int(values['-VOLUME SLIDER-']) / 100)
+
                 if not self.sys_music.audio_player.is_music_playing():
                     self.sys_music.audio_player.next()
                     window['-QUEUE-'].update(
@@ -356,7 +356,7 @@ class SysMusicGUI:
                     self.sys_music.create_random_playlist()
                     window['-PLAYLIST LIST-'].update(
                         [playlist.name for playlist in self.sys_music.user.playlists.values()])
-                except ValueError as e:
+                except Exception as e:
                     sg.popup(e)
             elif event == 'Recomendar playlist':
                 if values['-PLAYLIST LIST-']:
@@ -366,7 +366,7 @@ class SysMusicGUI:
                         self.sys_music.user.playlists[recommended_playlist.name] = recommended_playlist
                         window['-PLAYLIST LIST-'].update(
                             [playlist.name for playlist in self.sys_music.user.playlists.values()])
-                    except ValueError as e:
+                    except Exception as e:
                         sg.popup(e)
                 else:
                     sg.popup('Por favor, selecciona una playlist antes de presionar recomendar playlist')

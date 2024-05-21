@@ -3,7 +3,8 @@ import random
 import json
 from pathlib import Path
 from sistema_música.exceptions.exceptions import (AlreadyExistsError, EmptySongNameError, PlaylistNotFoundError,
-                                                  PlaylistAlreadyExistsError, NotMusicPlaying)
+                                                  PlaylistAlreadyExistsError, NotMusicPlaying, InvalidVolumeError,
+                                                  NotEnoughSongsError, ReferencePlaylistNotFoundError)
 
 
 class Song:
@@ -111,7 +112,7 @@ class AudioPlayer:
         if 0 <= self.volume <= 1:
             pygame.mixer.music.set_volume(self.volume)
         else:
-            raise ValueError("El volumen debe estar entre 0 y 100.")
+            raise InvalidVolumeError("El volumen debe estar entre 0 y 100.")
 
     def play_playlist(self, playlist: Playlist):
         if playlist.songs:
@@ -153,7 +154,7 @@ class SysMusic:
 
     def create_random_playlist(self):
         if len(self.songs) < 10:
-            raise ValueError("No hay suficientes canciones para crear una lista de reproducción aleatoria.")
+            raise NotEnoughSongsError("No hay suficientes canciones para crear una lista de reproducción aleatoria.")
         playlist_name = "Random Playlist"
         i = 1
         while playlist_name in self.user.playlists:
@@ -165,14 +166,14 @@ class SysMusic:
 
     def recommend_playlist(self, reference_playlist_name: str):
         if reference_playlist_name not in self.user.playlists:
-            raise ValueError("Playlist de referencia no encontrada.")
+            raise ReferencePlaylistNotFoundError("Playlist de referencia no encontrada.")
         reference_playlist = self.user.playlists[reference_playlist_name]
         num_songs = min(5, len(reference_playlist.songs))
         sampled_songs = random.sample(reference_playlist.songs, num_songs)
         genres = {song.genre for song in sampled_songs}
         potential_songs = [song for song in self.songs if song.genre in genres and song not in reference_playlist.songs]
         if len(potential_songs) < 10:
-            raise ValueError("No hay suficientes canciones para crear una lista de reproducción recomendada.")
+            raise NotEnoughSongsError("No hay suficientes canciones para crear una lista de reproducción recomendada.")
         recommended_songs = random.sample(potential_songs, 10)
         playlist_name = f"Playlist recomendada ({', '.join(genres)})"
         recommended_playlist = Playlist(recommended_songs, playlist_name)

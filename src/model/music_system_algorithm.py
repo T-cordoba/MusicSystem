@@ -2,9 +2,9 @@ import pygame
 import random
 import json
 from pathlib import Path
-from sistema_música.exceptions.exceptions import (AlreadyExistsError, EmptySongNameError, PlaylistNotFoundError,
-                                                  PlaylistAlreadyExistsError, NotMusicPlaying, InvalidVolumeError,
-                                                  NotEnoughSongsError, ReferencePlaylistNotFoundError)
+from src.exceptions.exceptions import (AlreadyExistsError, EmptySongNameError, PlaylistNotFoundError,
+                                       PlaylistAlreadyExistsError, NotMusicPlaying, InvalidVolumeError,
+                                       NotEnoughSongsError, ReferencePlaylistNotFoundError)
 
 
 class Song:

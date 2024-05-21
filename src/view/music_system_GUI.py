@@ -1,8 +1,8 @@
 import PySimpleGUI as sg
 from pathlib import Path
-from sistema_música.model.sis_música import Song, User, SysMusic
-from sistema_música.exceptions.exceptions import (InvalidNameError, InvalidEmailError, InvalidAgeError,
-                                                  InvalidOccupationError, InvalidCountryError)
+from src.model.music_system_algorithm import Song, User, SysMusic
+from src.exceptions.exceptions import (InvalidNameError, InvalidEmailError, InvalidAgeError,
+                                       InvalidOccupationError, InvalidCountryError)
 
 
 class SysMusicGUI:

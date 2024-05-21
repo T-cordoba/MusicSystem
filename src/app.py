@@ -1,5 +1,5 @@
-from sistema_música.model.sis_música import AudioPlayer, SysMusic
-from sistema_música.view.sis_música_gui import SysMusicGUI
+from src.model.music_system_algorithm import AudioPlayer, SysMusic
+from src.view.music_system_GUI import SysMusicGUI
 
 
 def main():

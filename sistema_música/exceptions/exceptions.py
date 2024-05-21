@@ -51,3 +51,18 @@ class PlaylistAlreadyExistsError(Exception):
 class NotMusicPlaying(Exception):
     def __init__(self, message):
         self.message = message
+
+
+class InvalidVolumeError(Exception):
+    def __init__(self, message):
+        self.message = message
+
+
+class NotEnoughSongsError(Exception):
+    def __init__(self, message):
+        self.message = message
+
+
+class ReferencePlaylistNotFoundError(Exception):
+    def __init__(self, message):
+        self.message = message

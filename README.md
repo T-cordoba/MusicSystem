@@ -1,6 +1,8 @@
 # AUTORES
 
 - Tomás Córdoba Urquijo
+- Paula Meneses
+- Daniel Correa
 
 # SISTEMA DE MÚSICA
 
@@ -10,14 +12,23 @@ que se adapten a sus gustos y preferencias.
 
 ## Funcionalidades
 
-- Añadir canciones al sistema de música
-- Crear listas de reproducción
-- Reproducir archivos de audio
-- Control de volumen
-- Control de reproducción
-- Cola de reproducción
-- Recomendaciones de canciones a través de listas de reproducción
-- Generar listas de reproducción aleatorias
+- Añadir una canción al sistema de música.
+- Eliminar una canción del sistema de música.
+- Proporcionar la información de perfil del usuario.
+- Reproducir una canción seleccionada.
+- Pausar la canción que se está reproduciendo.
+- Detener la canción que se está reproduciendo.
+- Saltar a la siguiente canción en la cola o lista de reproducción.
+- Editar los detalles de una canción en el sistema de música.
+- Añadir una canción seleccionada a la cola de reproducción.
+- Eliminar una canción seleccionada de la cola de reproducción.
+- Crear una nueva lista de reproducción.
+- Eliminar una lista de reproducción seleccionada.
+- Abrir y ver las canciones en una lista de reproducción seleccionada.
+- Renombrar una lista de reproducción seleccionada.
+- Reproducir todas las canciones en una lista de reproducción seleccionada.
+- Crear una lista de reproducción aleatoria.
+- Recomendar una lista de reproducción basada en las preferencias musicales del usuario.
 
 ## Cómo usar
 

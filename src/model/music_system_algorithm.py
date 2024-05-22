@@ -186,6 +186,9 @@ class SysMusic:
         for playlist in self.user.playlists.values():
             if song in playlist.songs:
                 playlist.songs.remove(song)
+        for queue_song in self.audio_player.queue:
+            if queue_song == song:
+                self.audio_player.queue.remove(song)
 
     def change_song_title(self, song: Song, new_title: str):
         if new_title is None or new_title == "":
@@ -204,3 +207,6 @@ class SysMusic:
             raise EmptySongNameError("El género de la canción no puede estar vacío.")
         else:
             song.genre = new_genre
+
+    def set_user(self, name: str, email: str):
+        self.user = User(name, email)

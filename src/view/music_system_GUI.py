@@ -65,9 +65,18 @@ class SysMusicGUI:
             window.close()
 
     def show_user_info_gui(self):
+        info = [
+            [sg.Text('Nombre:')],
+            [sg.Text('Email:')],
+        ]
+
+        inputs = [
+            [sg.Text(self.sys_music.user.name)],
+            [sg.Text(self.sys_music.user.email)]
+        ]
+
         user_info = [
-            [sg.Text('Nombre:'), sg.Text(self.sys_music.user.name)],
-            [sg.Text('Email:'), sg.Text(self.sys_music.user.email)],
+            [sg.Column(info, element_justification='l'), sg.Column(inputs, element_justification='l')]
         ]
 
         layout = [

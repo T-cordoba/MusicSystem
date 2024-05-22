@@ -1,58 +1,57 @@
 class Error(Exception):
-    """Base class for exceptions in this module."""
     pass
 
 
-class AlreadyExistsError(Exception):
+class AlreadyExistsError(Error):
     def __init__(self, message):
         self.message = message
 
 
-class EmptySongNameError(Exception):
+class EmptySongNameError(Error):
     def __init__(self, message):
         self.message = message
 
 
-class InvalidNameError(Exception):
+class InvalidNameError(Error):
     def __init__(self, message):
         self.message = message
 
 
-class InvalidEmailError(Exception):
+class InvalidEmailError(Error):
     def __init__(self, message):
         self.message = message
 
 
-class PlaylistNotFoundError(Exception):
+class PlaylistNotFoundError(Error):
     def __init__(self, message):
         self.message = message
 
 
-class PlaylistAlreadyExistsError(Exception):
+class PlaylistAlreadyExistsError(Error):
     def __init__(self, message):
         self.message = message
 
 
-class NotMusicPlaying(Exception):
+class NotMusicPlaying(Error):
     def __init__(self, message):
         self.message = message
 
 
-class InvalidVolumeError(Exception):
+class InvalidVolumeError(Error):
     def __init__(self, message):
         self.message = message
 
 
-class NotEnoughSongsError(Exception):
+class NotEnoughSongsError(Error):
     def __init__(self, message):
         self.message = message
 
 
-class ReferencePlaylistNotFoundError(Exception):
+class ReferencePlaylistNotFoundError(Error):
     def __init__(self, message):
         self.message = message
 
 
-class SongNotFoundError(Exception):
+class SongNotFoundError(Error):
     def __init__(self, message):
         self.message = message

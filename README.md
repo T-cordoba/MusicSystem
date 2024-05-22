@@ -34,8 +34,8 @@ que se adapten a sus gustos y preferencias.
 
 Para usar el sistema de música, se debe clonar el repositorio y ejecutar el archivo `app.py`
 
-Se le presentará una interfaz para ingresar los datos del usuario, y a continuación se le mostrará la interfaz principal
-del sistema de música.
+Se le presentará un menú de bienvenida para iniciar la aplicación. A partir de ahí, se le tomaran los datos de usuario y 
+accederá al sistema de música.
 
 ## Dependencias
 

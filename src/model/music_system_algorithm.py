@@ -4,7 +4,7 @@ import json
 from pathlib import Path
 from src.exceptions.exceptions import (AlreadyExistsError, EmptySongNameError, PlaylistNotFoundError,
                                        PlaylistAlreadyExistsError, NotMusicPlaying, InvalidVolumeError,
-                                       NotEnoughSongsError, ReferencePlaylistNotFoundError)
+                                       NotEnoughSongsError, ReferencePlaylistNotFoundError, SongNotFoundError)
 
 
 class Song:
@@ -33,12 +33,9 @@ class Playlist:
 
 
 class User:
-    def __init__(self, name: str, email: str, age: int, occupation: str, country: str):
+    def __init__(self, name: str, email: str):
         self.name = name
         self.email = email
-        self.age = age
-        self.occupation = occupation
-        self.country = country
         self.playlists: dict[str, Playlist] = {}
 
     def rename_playlist(self, old_name, new_name):
@@ -66,8 +63,7 @@ class User:
         self.playlists[playlist_name].remove_song(song)
 
     def __str__(self):
-        return (f"Nombre: {self.name} \nEmail: {self.email} \nAge: {self.age} \nOccupation: {self.occupation} \n"
-                f"Country: {self.country}")
+        return f"Nombre: {self.name} \n \nEmail: {self.email}"
 
 
 class AudioPlayer:
@@ -106,6 +102,12 @@ class AudioPlayer:
             self.queue.append(song)
         else:
             raise NotMusicPlaying("No hay música reproduciéndose.")
+
+    def remove_from_queue(self, song: Song):
+        if song in self.queue:
+            self.queue.remove(song)
+        else:
+            raise SongNotFoundError("La canción no está en la cola de reproducción.")
 
     def set_volume(self, volume: float):
         self.volume = volume

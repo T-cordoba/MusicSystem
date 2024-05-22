@@ -11,7 +11,7 @@ que se adapten a sus gustos y preferencias.
 
 El **modelo del mundo** para el sistema de música es el siguiente:
 
-![Modelo del mundo del sistema musica](assets/UML/Sistema_de_Música_M.drawio.png)
+![Modelo del mundo del sistema musica](assets/UML/uml_sys_m.png)
 
 
 

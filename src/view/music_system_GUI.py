@@ -1,6 +1,6 @@
 import PySimpleGUI as sg
 from pathlib import Path
-from src.model.music_system_algorithm import Song, User, SysMusic
+from src.model.music_system_algorithm import Song, SysMusic
 from src.exceptions.exceptions import (InvalidNameError, InvalidEmailError)
 
 
@@ -59,7 +59,7 @@ class SysMusicGUI:
                             raise InvalidNameError("El nombre solo puede contener letras")
                         if "@" not in email or "." not in email:
                             raise InvalidEmailError("El email debe contener @ y .")
-                        self.sys_music.user = User(name, email)
+                        self.sys_music.set_user(name, email)
                         window.close()
                         return
                     except (InvalidNameError, InvalidEmailError) as e:

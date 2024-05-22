@@ -3,7 +3,7 @@ from src.view.music_system_GUI import SysMusicGUI
 
 
 def main():
-    audio_player = AudioPlayer([])
+    audio_player = AudioPlayer()
     sys_music_fix = SysMusic(audio_player)
     gui = SysMusicGUI(sys_music_fix)
     gui.run()

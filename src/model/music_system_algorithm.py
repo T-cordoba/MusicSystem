@@ -65,8 +65,8 @@ class User:
 
 
 class AudioPlayer:
-    def __init__(self, queue: list[Song]):
-        self.queue = queue
+    def __init__(self):
+        self.queue = []
         self.volume = 0.5
         self.is_playing = False
         pygame.mixer.init()

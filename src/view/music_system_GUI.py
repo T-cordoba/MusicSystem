@@ -13,13 +13,17 @@ class SysMusicGUI:
     def start_menu_gui(self):
         layout = [
             [sg.Text('Sistema de música', font=('Book', 20))],
+            [sg.Text('')],
             [sg.Image(str((Path(__file__).resolve().parents[2] / 'assets' / 'Icons' / 'music_icon.png')),
                       subsample=4)],
+            [sg.Text('')],
+            [sg.Text('¡Bienvenido al sistema de música!')],
             [sg.Text('')],
             [sg.Button('Iniciar', size=(8, 2), border_width=0), sg.Button('Salir', size=(8, 2), border_width=0)]
         ]
 
-        window = sg.Window('Sistema de música', layout, element_justification='c', finalize=True)
+        window = sg.Window('Sistema de música', layout, element_justification='c', finalize=True, margins=(10, 10),
+                           resizable=True)
 
         while True:
             event, values = window.read()
@@ -93,7 +97,7 @@ class SysMusicGUI:
 
         window.close()
 
-    def add_song_gui(self, file_path):
+    def add_song_gui(self, file_path: str):
         layout = [
             [sg.Text(f'Dirección del archivo: {file_path}')],
             [sg.Text('Titulo:'), sg.InputText(key='-TITLE-')],
@@ -114,7 +118,7 @@ class SysMusicGUI:
         window.close()
         return {**values, '-FILEPATH-': file_path}
 
-    def edit_song_gui(self, song):
+    def edit_song_gui(self, song: Song):
         layout = [
             [sg.Text('Title:'), sg.InputText(song.title, key='-TITLE-')],
             [sg.Text('Artist:'), sg.InputText(song.artist, key='-ARTIST-')],
@@ -129,9 +133,12 @@ class SysMusicGUI:
             if event == sg.WINDOW_CLOSED or event == 'Cancel':
                 break
             if event == 'OK':
-                song.title = values['-TITLE-']
-                song.artist = values['-ARTIST-']
-                song.genre = values['-GENRE-']
+                try:
+                    self.sys_music.change_song_title(song, values['-TITLE-'])
+                    self.sys_music.change_song_artist(song, values['-ARTIST-'])
+                    self.sys_music.change_song_genre(song, values['-GENRE-'])
+                except Exception as e:
+                    sg.popup(e)
                 break
 
         window.close()
@@ -155,7 +162,7 @@ class SysMusicGUI:
 
         window.close()
 
-    def rename_playlist_gui(self, playlist_name):
+    def rename_playlist_gui(self, playlist_name: str):
         layout = [
             [sg.Text(playlist_name, key='-PLAYLIST NAME-')],
             [sg.Text('Nuevo nombre:'), sg.InputText(key='-NEW NAME-')],
@@ -177,7 +184,7 @@ class SysMusicGUI:
 
         window.close()
 
-    def open_playlist_gui(self, playlist_name):
+    def open_playlist_gui(self, playlist_name: str):
         playlist = self.sys_music.user.playlists[playlist_name]
         song_list = [f"{song.title} - {song.artist} - {song.genre}" for song in playlist.songs]
 
@@ -351,13 +358,13 @@ class SysMusicGUI:
 
         return layout
 
-    def update_pause_button(self, window):
+    def update_pause_button(self, window: sg.Window):
         window['-PAUSE MUSIC-'].update(
             image_source=str((Path(__file__).resolve().parents[2] / 'assets' / 'Icons' / 'pause.png')),
             image_subsample=25
         )
 
-    def update_resume_button(self, window):
+    def update_resume_button(self, window: sg.Window):
         window['-PAUSE MUSIC-'].update(
             image_source=str((Path(__file__).resolve().parents[2] / 'assets' / 'Icons' / 'resume.png')),
             image_subsample=25

@@ -9,8 +9,6 @@ from src.exceptions.exceptions import (AlreadyExistsError, EmptySongNameError, P
 
 class Song:
     def __init__(self, title: str, artist: str, genre: str, file_path: str):
-        if title is None:
-            raise EmptySongNameError("El nombre de la canción no puede estar vacío.")
         self.title = title
         self.artist = artist
         self.genre = genre
@@ -38,7 +36,7 @@ class User:
         self.email = email
         self.playlists: dict[str, Playlist] = {}
 
-    def rename_playlist(self, old_name, new_name):
+    def rename_playlist(self, old_name: str, new_name: str):
         if old_name not in self.playlists:
             raise PlaylistNotFoundError(f'No existe una playlist con el nombre {old_name}')
         elif new_name in self.playlists:
@@ -185,6 +183,24 @@ class SysMusic:
 
     def remove_song(self, song: Song):
         self.songs.remove(song)
+        for playlist in self.user.playlists.values():
+            if song in playlist.songs:
+                playlist.songs.remove(song)
 
-    def set_user(self, user: User):
-        self.user = user
+    def change_song_title(self, song: Song, new_title: str):
+        if new_title is None or new_title == "":
+            raise EmptySongNameError("El nombre de la canción no puede estar vacío.")
+        else:
+            song.title = new_title
+
+    def change_song_artist(self, song: Song, new_artist: str):
+        if new_artist is None or new_artist == "":
+            raise EmptySongNameError("El nombre del artista no puede estar vacío.")
+        else:
+            song.artist = new_artist
+
+    def change_song_genre(self, song: Song, new_genre: str):
+        if new_genre is None or new_genre == "":
+            raise EmptySongNameError("El género de la canción no puede estar vacío.")
+        else:
+            song.genre = new_genre

@@ -23,21 +23,6 @@ class InvalidEmailError(Exception):
         self.message = message
 
 
-class InvalidAgeError(Exception):
-    def __init__(self, message):
-        self.message = message
-
-
-class InvalidOccupationError(Exception):
-    def __init__(self, message):
-        self.message = message
-
-
-class InvalidCountryError(Exception):
-    def __init__(self, message):
-        self.message = message
-
-
 class PlaylistNotFoundError(Exception):
     def __init__(self, message):
         self.message = message
@@ -64,5 +49,10 @@ class NotEnoughSongsError(Exception):
 
 
 class ReferencePlaylistNotFoundError(Exception):
+    def __init__(self, message):
+        self.message = message
+
+
+class SongNotFoundError(Exception):
     def __init__(self, message):
         self.message = message

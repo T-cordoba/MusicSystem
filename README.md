@@ -9,8 +9,14 @@
 Este proyecto es un reproductor de audio que personaliza la experiencia musical del usuario, ofreciendo funcionalidades 
 que se adapten a sus gustos y preferencias.
 
+# MODELO DE MUNDO 
+El **modelo del mundo** para el sistema de música es el siguiente:
 
-## Funcionalidades
+![Modelo del mundo del sistema musica](assets/UML/uml_sys_gui.png)
+
+
+
+## FUNCIONALIDADES
 
 - Añadir una canción al sistema de música.
 - Eliminar una canción del sistema de música.
@@ -30,14 +36,14 @@ que se adapten a sus gustos y preferencias.
 - Crear una lista de reproducción aleatoria.
 - Recomendar una lista de reproducción basada en las preferencias musicales del usuario.
 
-## Cómo usar
+## CÓMO USAR
 
 Para usar el sistema de música, se debe clonar el repositorio y ejecutar el archivo `app.py`
 
 Se le presentará un menú de bienvenida para iniciar la aplicación. A partir de ahí, se le tomaran los datos de usuario y 
 accederá al sistema de música.
 
-## Dependencias
+## DEPENDENCIAS
 
 Este proyecto hace uso de las siguientes librerías:
 

@@ -1,57 +1,57 @@
-class Error(Exception):
+class SysMusicError(Exception):
     pass
 
 
-class AlreadyExistsError(Error):
+class AlreadyExistsError(SysMusicError):
     def __init__(self, message):
         self.message = message
 
 
-class EmptySongNameError(Error):
+class EmptySongNameError(SysMusicError):
     def __init__(self, message):
         self.message = message
 
 
-class InvalidNameError(Error):
+class InvalidNameError(SysMusicError):
     def __init__(self, message):
         self.message = message
 
 
-class InvalidEmailError(Error):
+class InvalidEmailError(SysMusicError):
     def __init__(self, message):
         self.message = message
 
 
-class PlaylistNotFoundError(Error):
+class PlaylistNotFoundError(SysMusicError):
     def __init__(self, message):
         self.message = message
 
 
-class PlaylistAlreadyExistsError(Error):
+class PlaylistAlreadyExistsError(SysMusicError):
     def __init__(self, message):
         self.message = message
 
 
-class NotMusicPlaying(Error):
+class NotMusicPlaying(SysMusicError):
     def __init__(self, message):
         self.message = message
 
 
-class InvalidVolumeError(Error):
+class InvalidVolumeError(SysMusicError):
     def __init__(self, message):
         self.message = message
 
 
-class NotEnoughSongsError(Error):
+class NotEnoughSongsError(SysMusicError):
     def __init__(self, message):
         self.message = message
 
 
-class ReferencePlaylistNotFoundError(Error):
+class ReferencePlaylistNotFoundError(SysMusicError):
     def __init__(self, message):
         self.message = message
 
 
-class SongNotFoundError(Error):
+class SongNotFoundError(SysMusicError):
     def __init__(self, message):
         self.message = message

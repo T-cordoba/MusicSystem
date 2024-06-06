@@ -99,7 +99,7 @@ class AudioPlayer:
         if self.is_playing:
             self.queue.append(song)
         else:
-            raise NotMusicPlaying("No hay música reproduciéndose.")
+            raise NotMusicPlaying("Debe haber música en reproducción para añadir una nueva a la cola.")
 
     def remove_from_queue(self, song: Song):
         if song in self.queue:

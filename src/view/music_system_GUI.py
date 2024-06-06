@@ -1,7 +1,9 @@
 import PySimpleGUI as sg
 from pathlib import Path
 from src.model.music_system_algorithm import Song, SysMusic
-from src.exceptions.exceptions import (InvalidNameError, InvalidEmailError)
+from src.exceptions.exceptions import (InvalidNameError, InvalidEmailError, SysMusicError)
+
+icon_path: str = str((Path(__file__).resolve().parents[2] / 'assets' / 'Icons' / 'music_icon.ico'))
 
 
 class SysMusicGUI:
@@ -23,7 +25,7 @@ class SysMusicGUI:
         ]
 
         window = sg.Window('Sistema de música', layout, element_justification='c', finalize=True, margins=(10, 10),
-                           resizable=True)
+                           resizable=True, icon=icon_path)
 
         while True:
             event, values = window.read()
@@ -45,7 +47,7 @@ class SysMusicGUI:
             ]
 
             window = sg.Window('Información del usuario', layout, element_justification='c', resizable=True,
-                               margins=(10, 10))
+                               margins=(10, 10), icon=icon_path)
 
             while True:
                 event, values = window.read()
@@ -88,7 +90,7 @@ class SysMusicGUI:
             [sg.Button('Ok', border_width=0)]
         ]
 
-        window = sg.Window('', layout, element_justification='c', resizable=True, margins=(10, 10))
+        window = sg.Window('', layout, element_justification='c', resizable=True, margins=(10, 10), icon=icon_path)
 
         while True:
             event, values = window.read()
@@ -106,7 +108,7 @@ class SysMusicGUI:
             [sg.Button('OK', border_width=0), sg.Button('Cancelar', border_width=0)]
         ]
 
-        window = sg.Window('Añadir canción', layout)
+        window = sg.Window('Añadir canción', layout, icon=icon_path)
 
         while True:
             event, values = window.read()
@@ -126,7 +128,7 @@ class SysMusicGUI:
             [sg.Button('OK'), sg.Button('Cancel')]
         ]
 
-        window = sg.Window('Edit Song', layout)
+        window = sg.Window('Edit Song', layout, icon=icon_path)
 
         while True:
             event, values = window.read()
@@ -137,7 +139,7 @@ class SysMusicGUI:
                     self.sys_music.change_song_title(song, values['-TITLE-'])
                     self.sys_music.change_song_artist(song, values['-ARTIST-'])
                     self.sys_music.change_song_genre(song, values['-GENRE-'])
-                except Exception as e:
+                except SysMusicError as e:
                     sg.popup(e)
                 break
 
@@ -149,7 +151,7 @@ class SysMusicGUI:
             [sg.Button('OK', border_width=0)]
         ]
 
-        window = sg.Window('Crear playlist', layout)
+        window = sg.Window('Crear playlist', layout, icon=icon_path)
 
         while True:
             event, values = window.read()
@@ -169,7 +171,7 @@ class SysMusicGUI:
             [sg.Button('OK', border_width=0)]
         ]
 
-        window = sg.Window('Renombrar playlist', layout)
+        window = sg.Window('Renombrar playlist', layout, icon=icon_path)
 
         while True:
             event, values = window.read()
@@ -178,7 +180,7 @@ class SysMusicGUI:
             if event == 'OK':
                 try:
                     self.sys_music.user.rename_playlist(playlist_name, values['-NEW NAME-'])
-                except Exception as e:
+                except SysMusicError as e:
                     sg.popup(e)
                 break
 
@@ -213,7 +215,8 @@ class SysMusicGUI:
             [sg.Button('OK', border_width=0)]
         ]
 
-        window = sg.Window('Ver playlist', layout, resizable=True, element_justification='c', finalize=True)
+        window = sg.Window(str(playlist_name), layout, resizable=True, element_justification='c', finalize=True,
+                           icon=icon_path)
 
         while True:
             event, values = window.read()
@@ -258,7 +261,7 @@ class SysMusicGUI:
                        image_source=str((Path(__file__).resolve().parents[2] / 'assets' / 'Icons' / 'user.png')),
                        image_subsample=25, use_ttk_buttons=True,
                        button_color=(sg.theme_background_color(), sg.theme_background_color())),
-             sg.Text(f'¡Hola, {user_name}!')]
+             sg.Text(f'¡ Hola,{user_name}!')]
         ]
 
         col_playlist = [
@@ -282,7 +285,7 @@ class SysMusicGUI:
         col_songs = [
             [sg.Text('Canciones disponibles:')],
             [sg.Listbox(values=[], size=(50, 2), key='-SONG LIST-', bind_return_key=True, expand_y=True,
-                        justification='center', right_click_menu=['', ['Agregar canciones']])],
+                        justification='center')],
             [sg.Button(key='-EDIT SONG-', tooltip='Editar información de canción', border_width=0,
                        image_source=str((Path(__file__).resolve().parents[2] / 'assets' / 'Icons' / 'edit.png')),
                        image_subsample=30, button_color=(sg.theme_background_color(), sg.theme_background_color())),
@@ -315,8 +318,11 @@ class SysMusicGUI:
         ]
 
         col_volume = [
-            [sg.Image(source=str((Path(__file__).resolve().parents[2] / 'assets' / 'Icons' / 'volume.png')),
-                      subsample=25),
+            [sg.Button(key='-VOLUME BUTTON-',
+                       image_source=str((Path(__file__).resolve().parents[2] / 'assets' / 'Icons' / 'volume.png')),
+                       image_subsample=25, border_width=0,
+                       button_color=(sg.theme_background_color(), sg.theme_background_color()),
+                       tooltip='Activa o desactiva el volumen del reproductor'),
              sg.Slider(range=(0, 100), orientation='horizontal', size=(20, 10),
                        key='-VOLUME SLIDER-', default_value=50)],
         ]
@@ -371,9 +377,11 @@ class SysMusicGUI:
         )
 
     def music_player_gui(self):
+        old_volume = 50
+
         layout = self.create_music_player_gui()
 
-        window = sg.Window('Sistema de música', layout, finalize=True, resizable=True)
+        window = sg.Window('Sistema de música', layout, finalize=True, resizable=True, icon=icon_path)
 
         window['-SONG LIST-'].update(
             [f"{song.title} - {song.artist} - {song.genre}" for song in self.sys_music.songs])
@@ -395,6 +403,24 @@ class SysMusicGUI:
                             [f"{song.title} - {song.artist} - {song.genre}" for song in
                              self.sys_music.audio_player.queue])
 
+                if values['-VOLUME SLIDER-'] == 0:
+                    window['-VOLUME BUTTON-'].update(
+                        image_source=str((Path(__file__).resolve().parents[2] / 'assets' / 'Icons' / 'muted.png')),
+                        image_subsample=25
+                    )
+                else:
+                    window['-VOLUME BUTTON-'].update(
+                        image_source=str((Path(__file__).resolve().parents[2] / 'assets' / 'Icons' / 'volume.png')),
+                        image_subsample=25
+                    )
+
+            elif event == '-VOLUME BUTTON-':
+                if values['-VOLUME SLIDER-'] != 0:
+                    old_volume = values['-VOLUME SLIDER-']
+                    window['-VOLUME SLIDER-'].update(value=0)
+                else:
+                    window['-VOLUME SLIDER-'].update(value=old_volume)
+
             elif event == '-FILE-':
                 song_file_path = values['-FILE-'].split(';')[0]
                 song_details = self.add_song_gui(song_file_path)
@@ -403,7 +429,7 @@ class SysMusicGUI:
                                 song_file_path)
                     try:
                         self.sys_music.add_song(song)
-                    except Exception as e:
+                    except SysMusicError as e:
                         sg.popup(str(e))
                     window['-SONG LIST-'].update(
                         [f"{song.title} - {song.artist} - {song.genre}" for song in self.sys_music.songs])
@@ -460,12 +486,15 @@ class SysMusicGUI:
                     sg.popup('No hay canciones para parar')
 
             elif event == '-NEXT SONG-':
-                self.sys_music.audio_player.next()
-                self.update_pause_button(window)
-                paused = False
-                window['-QUEUE-'].update(
-                    [f"{song.title} - {song.artist} - {song.genre}" for song in
-                     self.sys_music.audio_player.queue])
+                if self.sys_music.audio_player.queue:
+                    self.sys_music.audio_player.next()
+                    self.update_pause_button(window)
+                    paused = False
+                    window['-QUEUE-'].update(
+                        [f"{song.title} - {song.artist} - {song.genre}" for song in
+                         self.sys_music.audio_player.queue])
+                else:
+                    sg.popup('La cola de reproducción está vacía')
 
             elif event == '-EDIT SONG-':
                 if values['-SONG LIST-']:
@@ -493,7 +522,7 @@ class SysMusicGUI:
                                     [f"{song.title} - {song.artist} - {song.genre}" for song in
                                      self.sys_music.audio_player.queue])
                                 break
-                            except Exception as e:
+                            except SysMusicError as e:
                                 sg.popup(e)
                 else:
                     sg.popup('Por favor, selecciona una canción antes de presionar añadir a la cola')
@@ -509,7 +538,7 @@ class SysMusicGUI:
                                     [f"{song.title} - {song.artist} - {song.genre}" for song in
                                      self.sys_music.audio_player.queue])
                                 break
-                            except Exception as e:
+                            except SysMusicError as e:
                                 sg.popup(e)
                 else:
                     sg.popup('Por favor, selecciona una canción antes de presionar añadir a la cola')
@@ -533,7 +562,7 @@ class SysMusicGUI:
                     selected_playlist = values['-PLAYLIST LIST-'][0]
                     self.open_playlist_gui(selected_playlist)
                 else:
-                    sg.popup('Por favor, selecciona una playlist antes de presionar Ver playlist')
+                    sg.popup('Por favor, selecciona una playlist antes de presionar "Abrir playlist"')
 
             elif event == 'Renombrar':
                 if values['-PLAYLIST LIST-']:
@@ -560,7 +589,7 @@ class SysMusicGUI:
                     self.sys_music.create_random_playlist()
                     window['-PLAYLIST LIST-'].update(
                         [playlist.name for playlist in self.sys_music.user.playlists.values()])
-                except Exception as e:
+                except SysMusicError as e:
                     sg.popup(e)
 
             elif event == 'Recomendar playlist':
@@ -571,7 +600,7 @@ class SysMusicGUI:
                         self.sys_music.user.playlists[recommended_playlist.name] = recommended_playlist
                         window['-PLAYLIST LIST-'].update(
                             [playlist.name for playlist in self.sys_music.user.playlists.values()])
-                    except Exception as e:
+                    except SysMusicError as e:
                         sg.popup(e)
                 else:
                     sg.popup('Por favor, selecciona una playlist antes de presionar recomendar playlist')

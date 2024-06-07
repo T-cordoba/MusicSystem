@@ -14,18 +14,17 @@ class SysMusicGUI:
 
     def start_menu_gui(self):
         layout = [
-            [sg.Text('Sistema de música', font=('Book', 20))],
-            [sg.Text('')],
+            [sg.Text('HexaBeat', font=('Quicksand', 25, 'bold'))],
             [sg.Image(str((Path(__file__).resolve().parents[2] / 'assets' / 'Icons' / 'music_icon.png')),
                       subsample=4)],
             [sg.Text('')],
-            [sg.Text('¡Bienvenido al sistema de música!')],
+            [sg.Text('¡Bienvenido HexaBeat, nuestro sistema de música!', font=('Quicksand', 15))],
             [sg.Text('')],
             [sg.Button('Iniciar', size=(8, 2), border_width=0), sg.Button('Salir', size=(8, 2), border_width=0)]
         ]
 
         window = sg.Window('Sistema de música', layout, element_justification='c', finalize=True, margins=(10, 10),
-                           resizable=True, icon=icon_path)
+                           resizable=True, icon=icon_path, font=('Quicksand', 10))
 
         while True:
             event, values = window.read()
@@ -47,7 +46,7 @@ class SysMusicGUI:
             ]
 
             window = sg.Window('Información del usuario', layout, element_justification='c', resizable=True,
-                               margins=(10, 10), icon=icon_path)
+                               margins=(10, 10), icon=icon_path, font=('Quicksand', 11))
 
             while True:
                 event, values = window.read()
@@ -90,7 +89,8 @@ class SysMusicGUI:
             [sg.Button('Ok', border_width=0)]
         ]
 
-        window = sg.Window('', layout, element_justification='c', resizable=True, margins=(10, 10), icon=icon_path)
+        window = sg.Window('', layout, element_justification='c', resizable=True, margins=(10, 10), icon=icon_path,
+                           font=('Quicksand', 11))
 
         while True:
             event, values = window.read()
@@ -108,7 +108,7 @@ class SysMusicGUI:
             [sg.Button('OK', border_width=0), sg.Button('Cancelar', border_width=0)]
         ]
 
-        window = sg.Window('Añadir canción', layout, icon=icon_path)
+        window = sg.Window('Añadir canción', layout, icon=icon_path, font=('Quicksand', 10))
 
         while True:
             event, values = window.read()
@@ -128,7 +128,7 @@ class SysMusicGUI:
             [sg.Button('OK'), sg.Button('Cancel')]
         ]
 
-        window = sg.Window('Edit Song', layout, icon=icon_path)
+        window = sg.Window('Edit Song', layout, icon=icon_path, font=('Quicksand', 10))
 
         while True:
             event, values = window.read()
@@ -151,7 +151,7 @@ class SysMusicGUI:
             [sg.Button('OK', border_width=0)]
         ]
 
-        window = sg.Window('Crear playlist', layout, icon=icon_path)
+        window = sg.Window('Crear playlist', layout, icon=icon_path, font=('Quicksand', 10))
 
         while True:
             event, values = window.read()
@@ -171,7 +171,7 @@ class SysMusicGUI:
             [sg.Button('OK', border_width=0)]
         ]
 
-        window = sg.Window('Renombrar playlist', layout, icon=icon_path)
+        window = sg.Window('Renombrar playlist', layout, icon=icon_path, font=('Quicksand', 10))
 
         while True:
             event, values = window.read()
@@ -216,7 +216,7 @@ class SysMusicGUI:
         ]
 
         window = sg.Window(str(playlist_name), layout, resizable=True, element_justification='c', finalize=True,
-                           icon=icon_path)
+                           icon=icon_path, font=('Quicksand', 10))
 
         while True:
             event, values = window.read()
@@ -265,7 +265,7 @@ class SysMusicGUI:
         ]
 
         col_playlist = [
-            [sg.Text('Playlists del usuario:')],
+            [sg.Text('Playlists del usuario:', font=('Quicksand', 11, 'bold'))],
             [sg.Listbox(values=[], size=(50, 2), key='-PLAYLIST LIST-', bind_return_key=True, expand_y=True,
                         justification='left')],
             [sg.Button(key='-PLAY PLAYLIST-', tooltip='Reproducir playlist', border_width=0,
@@ -277,13 +277,15 @@ class SysMusicGUI:
              sg.Button(key='-DELETE PLAYLIST-', tooltip='Eliminar playlist', border_width=0,
                        image_source=str((Path(__file__).resolve().parents[2] / 'assets' / 'Icons' / 'delete.png')),
                        image_subsample=30, button_color=(sg.theme_background_color(), sg.theme_background_color())),
-             sg.Button('Abrir', tooltip='Abrir y editar playlist seleccionada', border_width=0),
-             sg.Button('Renombrar', tooltip='Renombrar playlist seleccionada', border_width=0), ]
+             sg.Button('Abrir', tooltip='Abrir y editar playlist seleccionada', border_width=0,
+                       font=('Quicksand', 10, 'bold')),
+             sg.Button('Renombrar', tooltip='Renombrar playlist seleccionada', border_width=0,
+                       font=('Quicksand', 10, 'bold')), ]
 
         ]
 
         col_songs = [
-            [sg.Text('Canciones disponibles:')],
+            [sg.Text('Canciones disponibles:', font=('Quicksand', 11, 'bold'))],
             [sg.Listbox(values=[], size=(50, 2), key='-SONG LIST-', bind_return_key=True, expand_y=True,
                         justification='center')],
             [sg.Button(key='-EDIT SONG-', tooltip='Editar información de canción', border_width=0,
@@ -298,17 +300,19 @@ class SysMusicGUI:
         ]
 
         col_queue = [
-            [sg.Text('Canciones en la cola:')],
+            [sg.Text('Canciones en la cola:', font=('Quicksand', 11, 'bold'))],
             [sg.Listbox(values=[], size=(50, 2), key='-QUEUE-', bind_return_key=True, expand_y=True,
                         justification='right')],
-            [sg.Button('Quitar de la cola', tooltip='Eliminar de la cola la canción seleccionada', border_width=0), ]
+            [sg.Button('Quitar de la cola', tooltip='Eliminar de la cola la canción seleccionada',
+                       border_width=0, font=('Quicksand', 10, 'bold')), ]
         ]
 
         generate_playlists = [
             [sg.Button('Recomendar playlist',
                        tooltip='Recomienda una playlist con generos similares a la playlist seleccionada',
-                       border_width=0),
-             sg.Button('Crear playlist aleatoria', tooltip='Crea una playlist aleatoria', border_width=0)]
+                       border_width=0, font=('Quicksand', 10, 'bold')),
+             sg.Button('Crear playlist aleatoria', tooltip='Crea una playlist aleatoria', border_width=0,
+                       font=('Quicksand', 10, 'bold'))]
         ]
 
         lists = [
@@ -351,14 +355,15 @@ class SysMusicGUI:
         file_browser = [
             [sg.Input(key='-FILE-', visible=False, enable_events=True),
              sg.FileBrowse(file_types=(("MP3 Files", "*.mp3"),), button_text='Agregar canción al sistema',
-                           tooltip='Agrega un archivo de música al sistema')],
+                           tooltip='Agrega un archivo de música al sistema', font=('Quicksand', 10, 'bold'))],
         ]
 
         layout = [
             [sg.Frame('', layout=header, element_justification='c', expand_x=True)],
             [sg.Frame('', layout=file_browser, element_justification='c', expand_x=True)],
             [sg.Frame('', layout=lists, element_justification='c', expand_x=True, expand_y=True)],
-            [sg.Frame('Generar playlists', layout=generate_playlists, element_justification='c', expand_x=True)],
+            [sg.Frame('Generar playlists', layout=generate_playlists, element_justification='c', expand_x=True,
+                      font=('Quicksand', 10, 'bold'))],
             [sg.Frame('', layout=player, element_justification='c', expand_x=True)]
         ]
 
@@ -381,7 +386,8 @@ class SysMusicGUI:
 
         layout = self.create_music_player_gui()
 
-        window = sg.Window('Sistema de música', layout, finalize=True, resizable=True, icon=icon_path)
+        window = sg.Window('Sistema de música', layout, finalize=True, resizable=True, icon=icon_path,
+                           font=('Quicksand', 10))
 
         window['-SONG LIST-'].update(
             [f"{song.title} - {song.artist} - {song.genre}" for song in self.sys_music.songs])
